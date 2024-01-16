@@ -4,8 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
   <title>Weather App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css">
+
 </head>
 
 <body>
@@ -23,7 +28,7 @@
     <div class="weather-container">
 
       <!-- Grant Location Container -->
-      <div class="grant-location-container">
+      <div class="sub-container grant-location-container">
         <img src="./images/location.png" width="80" height="80" loading="lazy">
         <p>Grant Location Access</p>
         <p>Allow Access to get weather Information</p>
@@ -39,13 +44,13 @@
       </form>
 
       <!--Loading Screen container  -->
-      <div class="loading-container">
+      <div class="sub-container loading-container">
         <img src="./images/loading.gif" width="150" height="150">
         <p>Loading</p>
       </div>
 
       <!-- show weather info -->
-      <div class="user-info-container">
+      <div class="sub-container user-info-container">
         <!-- city name and flag -->
         <div class="name">
           <p data-cityName></p>
@@ -81,10 +86,16 @@
           </div>
         </div>
       </div>
+      <!-- handle api fetch error -->
+      <div class="sub-container api-error-container">
+        <img src="./images/not-found.png" data-notFoundImg />
+        <p data-apiErrorText></p>
+        <!-- <button class="btn" data-apiErrorBtn>Retry</button> -->
+        <p>No City Found</p>
+      </div>
     </div>
   </div>
 </body>
-
 <script src="./app.js"></script>
 
 </html>

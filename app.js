@@ -9,6 +9,7 @@ const searchForm = document.querySelector('[data-searchForm]');
 const loadingScreen = document.querySelector('.loading-container');
 const userInfoContainer = document.querySelector('.user-info-container');
 
+const apiErrorContainer = document.querySelector('.api-error-container');
 //initially vairables need????
 
 let oldTab = userTab;
@@ -78,8 +79,12 @@ async function fetchUserWeatherInfo(coordinates) {
     userInfoContainer.classList.add('active');
     renderWeatherInfo(data);
   } catch (err) {
+    // console.log("User - Api Fetch Error", error.message);
     loadingScreen.classList.remove('active');
-    //HW
+    apiErrorContainer.classList.add('active');
+    apiErrorImg.style.display = 'none';
+    apiErrorMessage.innerText = `Error: ${err?.message}`;
+    apiErrorBtn.addEventListener('click', fetchUserWeatherInfo);
   }
 }
 
@@ -149,10 +154,18 @@ async function fetchSearchWeatherInfo(city) {
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
     );
     const data = await response.json();
+    if (!data.sys) {
+      throw data;
+    }
     loadingScreen.classList.remove('active');
     userInfoContainer.classList.add('active');
     renderWeatherInfo(data);
   } catch (err) {
     //hW
+    // console.log("Search - Api Fetch Error", error.message);
+    loadingScreen.classList.remove('active');
+    apiErrorContainer.classList.add('active');
+    apiErrorMessage.innerText = `${err?.message}`;
+    apiErrorBtn.style.display = 'none';
   }
 }
